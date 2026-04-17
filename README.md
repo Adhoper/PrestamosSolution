@@ -1,46 +1,89 @@
 # Calculadora de Cuotas - Prueba Técnica
 
-Proyecto desarrollado en **ASP.NET Core** con arquitectura por capas para calcular la cuota de un préstamo según la edad del solicitante, el monto solicitado y la cantidad de meses.
+Aplicación desarrollada en ASP.NET Core que calcula la cuota mensual de un préstamo según la edad, el monto y el plazo.
 
-## Descripción general
+---
 
-La aplicación permite ingresar:
+## 📸 Vista de la aplicación
+
+![Calculadora](./docs/CalculadoraCuotas.png)
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- ASP.NET Core MVC
+- ASP.NET Core Web API
+- SQL Server
+- Dapper
+- Bootstrap
+- Stored Procedures
+
+---
+
+## 🧠 Arquitectura
+
+El proyecto está dividido en capas:
+
+- Prestamos.Web → Interfaz (MVC)
+- Prestamos.Api → API REST
+- Prestamos.Business → Lógica de negocio
+- Prestamos.Data → Acceso a datos
+- Prestamos.Entities → Modelos y DTOs
+
+---
+
+## ⚙️ Funcionalidad
+
+Permite ingresar:
 
 - Fecha de nacimiento
 - Monto del préstamo
-- Meses del préstamo
+- Meses (3, 6, 9, 12)
 
-Con esos datos, el sistema:
+Y calcula:
 
-- Calcula la edad del solicitante
-- Obtiene la tasa correspondiente según la edad
-- Valida que el plazo ingresado sea permitido
-- Calcula la cuota mensual
-- Registra la consulta en una tabla log con la IP de la solicitud
-
-## Reglas de negocio
-
-### Tasas por edad
-
-| Edad | Tasa |
-|------|------|
-| 18 | 1.20 |
-| 19 | 1.18 |
-| 20 | 1.16 |
-| 21 | 1.14 |
-| 22 | 1.12 |
-| 23 | 1.10 |
-| 24 | 1.08 |
-| 25 | 1.05 |
-
-### Meses permitidos
-
-- 3
-- 6
-- 9
-- 12
-
-### Fórmula aplicada
-
-```text
 Cuota = (Monto * Tasa) / Meses
+
+También:
+- valida edad (18–25)
+- registra cada consulta en la base de datos
+
+---
+
+## 🗄️ Base de datos
+
+Ejecutar el archivo:
+
+database.sql
+
+Esto crea:
+- Tablas
+- Datos iniciales
+- Stored Procedures
+
+---
+
+## ▶️ Ejecución
+
+1. Clonar el repositorio:
+
+git clone https://github.com/TU_USUARIO/PrestamosSolution.git
+
+2. Abrir la solución en Visual Studio
+
+3. Ejecutar database.sql en SQL Server
+
+4. Configurar cadena de conexión en:
+
+Prestamos.Api/appsettings.json
+
+5. Ejecutar:
+- Prestamos.Api
+- Prestamos.Web
+
+---
+
+## 👨‍💻 Autor
+
+Adrian Curet

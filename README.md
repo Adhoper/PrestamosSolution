@@ -4,6 +4,14 @@ Aplicación desarrollada en ASP.NET Core que calcula la cuota mensual de un pré
 
 ---
 
+## 🌐 Demo en línea
+
+Puedes probar la aplicación directamente aquí:
+
+👉 http://prestamosadhoper.somee.com
+
+---
+
 ## 📸 Vista de la aplicación
 
 ![Calculadora](./docs/CalculadoraCuotas.png)
@@ -26,7 +34,7 @@ Aplicación desarrollada en ASP.NET Core que calcula la cuota mensual de un pré
 El proyecto está dividido en capas:
 
 - Prestamos.Web → Interfaz (MVC)
-- Prestamos.Api → API REST
+- Prestamos.Api → API REST (hosteada en Azure)
 - Prestamos.Business → Lógica de negocio
 - Prestamos.Data → Acceso a datos
 - Prestamos.Entities → Modelos y DTOs
@@ -46,8 +54,9 @@ Y calcula:
 Cuota = (Monto * Tasa) / Meses
 
 También:
-- valida edad (18–25)
-- registra cada consulta en la base de datos
+- Valida edad (18–25)
+- Determina la tasa según rango de edad
+- Registra cada consulta en la base de datos
 
 ---
 
@@ -64,7 +73,7 @@ Esto crea:
 
 ---
 
-## ▶️ Ejecución
+## ▶️ Ejecución local
 
 1. Clonar el repositorio:
 
@@ -72,15 +81,24 @@ git clone https://github.com/Adhoper/PrestamosSolution.git
 
 2. Abrir la solución en Visual Studio
 
-3. Ejecutar database.sql en SQL Server
+3. Ejecutar el script `database.sql` en SQL Server
 
-4. Configurar cadena de conexión en:
+4. Configurar la cadena de conexión en:
 
 Prestamos.Api/appsettings.json
 
-5. Ejecutar:
+5. Ejecutar los proyectos:
+
 - Prestamos.Api
 - Prestamos.Web
+
+---
+
+## ☁️ Despliegue
+
+- API desplegada en Azure App Service
+- Web desplegada en Somee
+- Base de datos en SQL Server (Somee)
 
 ---
 

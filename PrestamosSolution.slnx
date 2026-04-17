@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Prestamos.Api/Prestamos.Api.csproj" />
+  <Project Path="Prestamos.Business/Prestamos.Business.csproj" />
+  <Project Path="Prestamos.Data/Prestamos.Data.csproj" />
+  <Project Path="Prestamos.Entities/Prestamos.Entities.csproj" />
+  <Project Path="Prestamos.Web/Prestamos.Web.csproj" />
+</Solution>

@@ -1,0 +1,146 @@
+﻿@model Prestamos.Web.Models.PrestamoViewModel
+
+@{
+    ViewData["Title"] = "Calculadora de Cuotas";
+}
+
+<div class="row justify-content-center g-4">
+    <div class="col-xl-10">
+        <div class="row g-4">
+            <!-- FORMULARIO -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h2 class="h3 fw-bold mb-1">Calculadora de Cuotas</h2>
+                        <p class="text-muted mb-0">
+                            Complete los datos para calcular la cuota mensual del préstamo.
+                        </p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form asp-action="Index" method="post" novalidate>
+                            <div class="mb-3">
+                                <label asp-for="FechaNacimiento" class="form-label fw-semibold"></label>
+                                <input asp-for="FechaNacimiento" class="form-control" type="date" />
+                                <span asp-validation-for="FechaNacimiento" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Monto" class="form-label fw-semibold"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">RD$</span>
+                                    <input asp-for="Monto" class="form-control" type="number" step="0.01" placeholder="Ej: 50000" />
+                                </div>
+                                <span asp-validation-for="Monto" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="Meses" class="form-label fw-semibold"></label>
+                                <select asp-for="Meses" class="form-select">
+                                    <option value="">Seleccione una opción</option>
+                                    @foreach (var mes in Model.OpcionesMeses)
+                                    {
+                                        <option value="@mes">@mes meses</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Meses" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary fw-semibold">
+                                    Calcular cuota
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTADO -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h3 class="h4 fw-bold mb-1">Resultado</h3>
+                        <p class="text-muted mb-0">
+                            Aquí se mostrará el resultado de la consulta.
+                        </p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            @if (Model.Success == true)
+                            {
+                                <div class="alert alert-success rounded-4 border-0 mb-4">
+                                    <div class="fw-semibold">@Model.Message</div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <div class="border rounded-3 p-3 bg-light h-100">
+                                            <div class="text-muted small">Edad</div>
+                                            <div class="fw-bold">@Model.Edad años</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="border rounded-3 p-3 bg-light h-100">
+                                            <div class="text-muted small">Tasa aplicada</div>
+                                            <div class="fw-bold">@Model.Tasa?.ToString("N2")</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="border rounded-3 p-3 bg-light h-100">
+                                            <div class="text-muted small">Monto solicitado</div>
+                                            <div class="fw-bold">RD$ @Model.Monto.ToString("N2")</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="border rounded-3 p-3 bg-light h-100">
+                                            <div class="text-muted small">Plazo</div>
+                                            <div class="fw-bold">@Model.Meses meses</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="border rounded-4 p-4 bg-primary bg-opacity-10">
+                                            <div class="text-muted small mb-1">Cuota mensual</div>
+                                            <div class="fw-bold text-primary display-6 mb-0">
+                                                RD$ @Model.Cuota?.ToString("N2")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning rounded-4 border-0 mb-0">
+                                    <h5 class="fw-bold mb-2">Resultado de la consulta</h5>
+                                    <p class="mb-0">@Model.Message</p>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="d-flex flex-column justify-content-center h-100 text-center text-muted py-5">
+                                <div class="mb-3 fs-1">📄</div>
+                                <h5 class="fw-semibold">Sin resultados todavía</h5>
+                                <p class="mb-0">
+                                    Ingrese la fecha de nacimiento, el monto y el plazo del préstamo para realizar el cálculo.
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -68,7 +68,7 @@ Esto crea:
 
 1. Clonar el repositorio:
 
-git clone https://github.com/TU_USUARIO/PrestamosSolution.git
+git clone https://github.com/Adhoper/PrestamosSolution.git
 
 2. Abrir la solución en Visual Studio
 
